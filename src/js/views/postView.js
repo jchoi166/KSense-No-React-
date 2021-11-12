@@ -9,6 +9,7 @@ const displayPost = (post) => {
       <div class="post" data-id="${post.id}">
          <h2>${post.title}</h2>
          <p>${post.body}<p>
+         <button type="button" class="commentButton">Load Comments</button>
       </div>
    `
    

@@ -1,6 +1,7 @@
 import * as API from "./api"
 import { displayAllUsers }from "./views/userView"
 import { displayAllPosts }from "./views/postView"
+import { displayAllComments } from "./views/commentView"
 import { elements } from "./base"
 
 
@@ -19,6 +20,16 @@ elements.userList.addEventListener('click', event => {
       user.classList.add('activeButton')
    }
 })
+
+elements.postList.addEventListener('click', event => {
+   // console.log(event.target.className)
+   let comment = event.target.className
+   if (comment === "commentButton") {
+      const post = event.target.closest(".post")
+      displayAllComments(post.dataset.id)
+   }
+})
+
 
 
 
