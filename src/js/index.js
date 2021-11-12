@@ -1,33 +1,25 @@
 import * as API from "./api"
-import { displayUser } from "./views/userView"
-import { displayPost } from "./views/postView"
+import { displayAllUsers }from "./views/userView"
+import { displayAllPosts }from "./views/postView"
 import { elements } from "./base"
 
 
-const displayUsers = async () => {
-   const userList = await API.getUsers()
-   userList.forEach(user => displayUser(user))
-   console.log("User List")
-   console.log(userList)
-}
-
-const displayPosts = async (userID) => {
-   const postList = await API.getPosts(userID)
-   elements.postList.innerHTML = ''
-   postList.forEach(post => displayPost(post))
-   console.log(`Post List for User ${userID}`)
-   console.log(postList)
+const removeActiveClass = () => {
+   let allUsers = elements.userList.children
+   for (let users of allUsers) {
+      users.classList.remove('activeButton')
+   }
 }
 
 elements.userList.addEventListener('click', event => {
    let user = event.target.closest(".user")
    if (user) {
-      displayPosts(user.dataset.id)
+      removeActiveClass()
+      displayAllPosts(user.dataset.id)
+      user.classList.add('activeButton')
    }
 })
 
 
 
-
-
-displayUsers()
+displayAllUsers()

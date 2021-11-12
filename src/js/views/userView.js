@@ -1,6 +1,7 @@
-import {elements} from "../base"
+import { elements } from "../base"
+import { getUsers } from "../api"
 
-export const displayUser = (user) => {
+const displayUser = (user) => {
    console.log('working')
    
    const markup = `
@@ -12,3 +13,9 @@ export const displayUser = (user) => {
    elements.userList.insertAdjacentHTML("beforeend", markup)
 }
 
+export const displayAllUsers = async () => {
+   const userList = await getUsers()
+   userList.forEach(user => displayUser(user))
+   console.log("User List")
+   console.log(userList)
+}

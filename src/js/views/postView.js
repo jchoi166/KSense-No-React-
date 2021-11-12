@@ -1,7 +1,8 @@
-import {elements} from "../base"
+import { elements } from "../base"
+import { getPosts } from "../api"
 
 
-export const displayPost = (post) => {
+const displayPost = (post) => {
    console.log('working')
    
    const markup = `
@@ -12,4 +13,12 @@ export const displayPost = (post) => {
    `
    
    elements.postList.insertAdjacentHTML("beforeend", markup)
+}
+
+export const displayAllPosts = async (userID) => {
+   const postList = await getPosts(userID)
+   elements.postList.innerHTML = ''
+   postList.forEach(post => displayPost(post))
+   console.log(`Post List for User ${userID}`)
+   console.log(postList)
 }
